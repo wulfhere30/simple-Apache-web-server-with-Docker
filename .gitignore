@@ -1,0 +1,20 @@
+# .gitignore
+
+# Ignore system files
+*.DS_Store
+Thumbs.db
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore Docker files
+Dockerfile
+.dockerignore
+
+# Ignore IDE specific files
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
