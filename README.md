@@ -31,16 +31,8 @@ This project displays a Ukrainian poem via an Apache web server. You can run thi
 
 Open your web browser and navigate to `http://localhost/poem.html` to see the poem.
 
-### Docker Deployment with Apache
+### Docker Deployment with 
 
-#### Create Dockerfile
+## License
 
-Create a Dockerfile in your project directory and add the following content:
-
-```Dockerfile
-FROM httpd:2.4
-COPY ./poem.html /usr/local/apache2/htdocs/poem.html```
-
-This tells Docker to use the official Apache 2.4 image and copies the poem.html file into Apache's HTML directory inside the container.
-
-#### Create HTML file
+This project is distributed under the MIT License. See `LICENSE` file for more details.
