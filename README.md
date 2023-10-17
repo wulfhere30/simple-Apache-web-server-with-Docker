@@ -1,68 +1,46 @@
-# Ukrainian Poem with Apache on Docker
+# Ukrainian Poem with Apache
 
 ## Introduction
 
-This project is a simple Apache web server deployed with Docker that displays a Ukrainian poem on a web page. The app can be run locally or on a remote host.
+This project displays a Ukrainian poem via an Apache web server. You can run this application locally or deploy it using Docker.
 
 ## Requirements
 
+- Apache HTTP Server
 - Docker
 
-## Installation and Running
+## Installation and Configuration
 
-### Local Deployment
+### Local Deployment with Apache
 
-#### Using Docker and Apache
-
-1. **Clone the Repository:**
-
+1. **Install Apache on Ubuntu:**
     ```bash
-    git clone [Your GitHub Repository URL]
+    sudo apt-get update
+    sudo apt-get install apache2
+    ```
+   
+2. **Check Apache Status:**
+    ```bash
+    sudo systemctl status apache2
     ```
 
-2. **Navigate to your project directory where the Dockerfile is located.**
-
+3. **Place your HTML file in Apache's directory:**
     ```bash
-    cd [Your Project Directory]
+    sudo cp poem.html /var/www/html/
     ```
 
-3. **Build the Docker Image:**
+Open your web browser and navigate to `http://localhost/poem.html` to see the poem.
 
-    ```bash
-    docker build -t ukrainian-poem-apache .
-    ```
+### Docker Deployment with Apache
 
-4. **Run the Docker Container:**
+#### Create Dockerfile
 
-    ```bash
-    docker run -p 8080:80 ukrainian-poem-apache
-    ```
+Create a Dockerfile in your project directory and add the following content:
 
-After completing these steps, open your web browser and navigate to `http://localhost:8080/your_html_file.html` to verify the deployment.
+```Dockerfile
+FROM httpd:2.4
+COPY ./poem.html /usr/local/apache2/htdocs/poem.html
 
-### Remote Deployment
+This tells Docker to use the official Apache 2.4 image and copies the poem.html file into Apache's HTML directory inside the container.
 
-If you want to run this app on a remote host, you can push your Docker image to a registry like Docker Hub and then pull it on the remote machine, or you can build it directly on the remote machine by following the same steps as above.
-
-To make the application accessible from the Internet, you may need to configure your firewall and port forwarding settings to expose port 8080. 
-
-## Additional Commands for Apache
-
-- To check Apache server status:
-
-    ```bash
-    docker exec -it [CONTAINER_ID] /bin/bash
-    apachectl status
-    ```
-
-- To reload Apache configuration:
-
-    ```bash
-    docker exec -it [CONTAINER_ID] /bin/bash
-    apachectl graceful
-    ```
-
-## License
-
-This project is distributed under the MIT License. See `LICENSE` file for more details.
-
+#### Create HTML file
